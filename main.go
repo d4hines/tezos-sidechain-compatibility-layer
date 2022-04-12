@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 
 	"example.com/deku_interop"
@@ -33,7 +34,7 @@ func init() {
 }
 
 func main() {
-	state_transition := func(input []byte) {
+	state_transition := func(input []byte) (return_err error) {
 		var message message
 		log(fmt.Sprintf("State transition received %s", string(input)))
 		err := json.Unmarshal(input, &message)
@@ -42,7 +43,7 @@ func main() {
 		stub, err := c.NewChaincodeStub(message.Args, &shim.Handler{}, "", "",
 			&pb.ChaincodeInput{}, &pb.SignedProposal{})
 		if err != nil {
-			log(fmt.Sprintf("error creating newChaincodeStub: %+v", err.Error()))
+			return errors.New(fmt.Sprintf("error creating newChaincodeStub: %+v", err.Error()))
 
 		}
 
@@ -55,8 +56,9 @@ func main() {
 			log(fmt.Sprintf("inside Invoke case"))
 			handleShimResponse(chaincode.Invoke(stub))
 		default:
-			log(fmt.Sprintf("Not supported Action: %v", message.Action))
+			return errors.New(fmt.Sprintf("Not supported Action: %v", message.Action))
 		}
+		return
 	}
 	deku_interop.Main(state_transition)
 }
