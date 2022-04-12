@@ -124,7 +124,7 @@ func (s *ChaincodeStub) PutState(key string, value []byte) error {
 func (s *ChaincodeStub) GetState(key string) ([]byte, error) {
 	fmt.Println("Inside GetState")
 
-	return deku_interop.Get(key)
+	return deku_interop.Get(key), nil
 }
 
 // default
