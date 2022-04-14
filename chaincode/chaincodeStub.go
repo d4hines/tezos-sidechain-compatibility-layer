@@ -8,7 +8,7 @@ import (
 	"github.com/hyperledger/fabric/protos/ledger/queryresult"
 	pb "github.com/hyperledger/fabric/protos/peer"
 
-	"example.com/deku_interop"
+	"github.com/marigold-dev/deku-go-interop"
 	"github.com/golang/protobuf/ptypes/timestamp"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )

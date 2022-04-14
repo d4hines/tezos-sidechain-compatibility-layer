@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"example.com/deku_interop"
+	"github.com/marigold-dev/deku-go-interop"
 	c "example.com/state_transition/chaincode"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
